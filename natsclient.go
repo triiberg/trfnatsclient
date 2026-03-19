@@ -17,20 +17,18 @@ const (
 
 // EmbedRequest is published by domain services when embeddable content changes.
 type EmbedRequest struct {
-	TenantSchema string `json:"tenant_schema"`
-	OrgID        string `json:"org_id"`    // UUID as string
-	Domain       string `json:"domain"`    // "journal_entry" | "invoice" | "contact"
-	RecordID     string `json:"record_id"` // UUID as string
-	Text         string `json:"text"`
-	ContentHash  string `json:"content_hash"` // SHA256(text) — skip if unchanged
+	OrgID       string `json:"org_id"`       // UUID as string
+	Domain      string `json:"domain"`       // "journal_entry" | "invoice" | "contact"
+	RecordID    string `json:"record_id"`    // UUID as string
+	Text        string `json:"text"`
+	ContentHash string `json:"content_hash"` // SHA256(text) — skip if unchanged
 }
 
 // AuditEvent is published by domain services on every data mutation.
 type AuditEvent struct {
-	EventID      string `json:"event_id"`     // uuid — idempotency key
-	OrgID        string `json:"org_id"`
-	TenantSchema string `json:"tenant_schema"`
-	Service      string `json:"service"`      // "ledger"|"invoices"|"crm"|"payments"
+	EventID    string `json:"event_id"` // uuid — idempotency key
+	OrgID      string `json:"org_id"`
+	Service    string `json:"service"`  // "ledger"|"invoices"|"crm"|"payments"
 	EntityType   string `json:"entity_type"`  // "journal_entry"|"invoice"|"contact"|"payment"|etc.
 	EntityID     string `json:"entity_id"`    // uuid
 	Action       string `json:"action"`       // "create"|"update"|"delete"|"post"|"void"|"confirm"|etc.
